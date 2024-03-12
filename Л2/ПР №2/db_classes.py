@@ -1,42 +1,41 @@
 from datetime import datetime
-from typing import List
 
 class User:
 
     def __init__(self, email, password, name="Без имени",): 
         
-        self.email = email
-        self.password = password
-        self.name = name
+        self.email: str = email
+        self.password: str = password
+        self.name: str = name
 
-        self.comments = []
-        self.created_feedbacks = []
-        self.recieved_feedbacks = []
-        self.transactions = []
-        self.advertisements = []
+        self.comments: list[Comment] = []
+        self.created_feedbacks: list[Feedback] = []
+        self.recieved_feedbacks: list[Feedback] = []
+        self.transactions: list[Transaction] = []
+        self.advertisements: list[Advertisement] = []
 
 class Category:
 
     def __init__(self, name):
-        self.name = name
-        advertisements = []
+        self.name: str = name
+        advertisements: list[Advertisement] = []
 
 class Advertisement:
 
     def __init__(self, user, title, description, price=None,  category=None):
 
-        self.creation_datetime = datetime.now()
+        self.creation_datetime: datetime = datetime.now()
 
-        self.title = title
-        self.description = description
-        self.price = price
-        self.comments = []
-        self.transactions = [] 
+        self.title: str = title
+        self.description: str = description
+        self.price: float = price
+        self.comments: list[Comment] = []
+        self.transactions: list[Transaction] = [] 
 
-        self.user = None
+        self.user: User = None
         self.setUser(user)
 
-        self.category = None
+        self.category: Category = None
         self.setCategory(category)
         
     def setUser(self, value):
@@ -53,14 +52,14 @@ class Comment:
 
     def __init__(self, text, user, advertisement):
 
-        self.creation_datetime = datetime.now()
+        self.creation_datetime: datetime = datetime.now()
 
-        self.text = text
+        self.text: str = text
 
-        self.user = None
+        self.user: User = None
         self.setUser(user)
 
-        self.advertisement = None
+        self.advertisement: Advertisement = None
         self.setAdvertisement(advertisement)
 
     def setUser(self, value):
@@ -76,13 +75,13 @@ class Comment:
 class Transaction:
 
     def __init__(self, user, advertisement, count=1):
-        self.creation_datetime = datetime
-        self.count = count
+        self.creation_datetime: datetime = datetime
+        self.count: int = count
 
-        self.user_customer = None
+        self.user_customer: User = None
         self.setUser(user)
 
-        self.advertisement = None
+        self.advertisement: Advertisement = None
         self.setAdvertisement(advertisement)
     
     def setUser(self, value):
@@ -98,13 +97,13 @@ class Transaction:
 class Feedback:
 
     def __init__(self, creator, reciever, rate, text=None):
-        self.rate = rate
-        self.text = text
+        self.rate: float = rate
+        self.text: str = text
 
-        self.user_creator = None
+        self.user_creator: User = None
         self.setCreator(creator)
 
-        self.user_reciever = reciever
+        self.user_reciever: User = reciever
         self.setReciever(reciever)
 
     def setCreator(self, value):
